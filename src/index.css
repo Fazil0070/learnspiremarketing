@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gradient-blue-purple: linear-gradient(to right, #2563EB, #7C3AED);
+  --gradient-blue-indigo: linear-gradient(to right, #2563EB, #4F46E5);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply text-gray-900 antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold;
+}
+
+a {
+  @apply text-inherit no-underline transition-colors duration-300;
+}
+
+a:hover {
+  @apply underline text-blue-600;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.bg-gradient-blue-purple {
+  background-image: var(--gradient-blue-purple);
+}
+
+.bg-gradient-blue-indigo {
+  background-image: var(--gradient-blue-indigo);
+}
+
+.text-gradient {
+  @apply text-transparent bg-clip-text;
+  background-image: var(--gradient-blue-purple);
+}
+
+.btn {
+  @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300;
+}
+
+.btn-gradient {
+  @apply btn text-white;
+  background-image: var(--gradient-blue-purple);
+}
+
+.btn-gradient:hover {
+  background-image: var(--gradient-blue-indigo);
+}
+
+.feature-card {
+  @apply bg-white p-6 rounded-xl shadow-md transition-all duration-300;
+}
+
+.feature-card:hover {
+  @apply -translate-y-1 shadow-xl;
+}
+
+@media (min-width: 768px) {
+  .feature-card {
+    @apply p-8;
+  }
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure gradients work across different browsers */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .text-gradient {
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+/* Additional styles for enhanced visual appeal */
+
+/* Header styles */
+.header {
+  @apply bg-white/90 backdrop-blur-md shadow-md fixed w-full z-50 transition-all duration-300;
+}
+
+.header-scrolled {
+  @apply py-2;
+}
+
+.header-nav-link {
+  @apply text-gray-600 hover:text-blue-600 transition-colors;
+}
+
+/* Hero section styles */
+.hero {
+  @apply relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-blue-100 via-indigo-50 to-white;
+}
+
+.hero-title {
+  @apply text-5xl md:text-7xl font-extrabold mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
+}
+
+.hero-subtitle {
+  @apply text-xl md:text-2xl mb-10 text-gray-700 max-w-3xl mx-auto;
+}
+
+/* Section styles */
+.section-title {
+  @apply text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16;
+}
+
+/* Testimonial styles */
+.testimonial {
+  @apply bg-white p-8 rounded-xl shadow-lg;
+}
+
+.testimonial-text {
+  @apply text-gray-600 mb-4;
+}
+
+.testimonial-author {
+  @apply font-semibold text-gray-800;
+}
+
+/* CTA section styles */
+.cta-section {
+  @apply py-20 md:py-32 bg-gradient-to-br from-blue-600 to-indigo-700 text-white;
+}
+
+/* Footer styles */
+.footer {
+  @apply bg-gray-900 text-white py-12;
+}
+
+.footer-title {
+  @apply text-2xl font-bold mb-4;
+}
+
+.footer-link {
+  @apply text-gray-400 hover:text-white transition-colors;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .hero-title {
+    @apply text-4xl;
+  }
+  
+  .hero-subtitle {
+    @apply text-lg;
+  }
+  
+  .section-title {
+    @apply text-3xl;
+  }
+}
+
+/* Ensure text readability on gradient backgrounds */
+.text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
