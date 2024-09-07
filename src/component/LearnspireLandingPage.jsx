@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import {
   ChevronRight, RocketIcon, GitBranchIcon, BarChartIcon, 
   LaptopIcon, UserCheckIcon, CodeIcon, BellIcon, 
   ShieldCheckIcon, LayoutIcon, MenuIcon, XIcon
 } from 'lucide-react';
+import { useEffect, useState } from 'react'
 
+// eslint-disable-next-line react/prop-types
 const FeatureCard = ({ icon: Icon, title, description }) => {
   return (
     <div className="group h-full transition-all duration-300 hover:scale-105 hover:rotate-1">
@@ -73,8 +74,8 @@ const AnimatedCube = () => {
 
 const AILearningCycle = () => {
   return (
-    <div className="max-w-3xl mx-auto">
-      <svg viewBox="0 0 500 500" className="w-full h-auto">
+    <div className="flex items-center justify-center flex-col">
+      <svg viewBox="-100 0 800 800" fill="#000000" className="flex h-screen w-screen items-center justify-center flex-col pl-8 pr-10">
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3B82F6" />
@@ -117,16 +118,17 @@ const AILearningCycle = () => {
             <animate attributeName="stroke-dasharray" values="0,1000;140,1000;140,1000" dur="2s" repeatCount="indefinite" begin="1.5s" />
           </path>
         </g>
-        <g fontSize="16" fill="#4B5563" textAnchor="middle" filter="url(#glow)">
-          <text x="250" y="25">Content Delivery</text>
-          <text x="475" y="255">Assessment</text>
-          <text x="250" y="485">Feedback</text>
-          <text x="25" y="255">Personalization</text>
+        <g className="" fontWeight="bold" fontSize="16" fill="blue" textAnchor="middle" filter="">
+          <text x="250" y="15">Content Delivery</text>
+          <text x="530" y="255">Assessment</text>
+          <text x="250" y="500">Feedback</text>
+          <text x="-40" y="255">Personalization</text>
         </g>
       </svg>
     </div>
   );
 };
+
 
 const LearnspireLandingPage = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -219,11 +221,11 @@ const LearnspireLandingPage = () => {
       </section>
 
       {/* Why Learnspire Section */}
-      <section id="why-learnspire" className="py-20 md:py-32 bg-white">
+      <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
-          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-10">
             Why Choose Learnspire?
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <FeatureCard
               icon={RocketIcon}
@@ -247,7 +249,7 @@ const LearnspireLandingPage = () => {
       {/* Features Section */}
       <section id="features" className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-6">
-          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
+          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
             Cutting-Edge Features
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -266,7 +268,7 @@ const LearnspireLandingPage = () => {
        {/* AI Learning Cycle Section */}
        <section className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-6">
-          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
+          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
             AI-Powered Learning Cycle
           </h3>
           <AILearningCycle />
@@ -280,7 +282,7 @@ const LearnspireLandingPage = () => {
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-6">
-          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
+          <h3 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-16">
             What Our Clients Say
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
