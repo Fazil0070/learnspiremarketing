@@ -1,20 +1,63 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
 import {
   ChevronRight, RocketIcon, GitBranchIcon, BarChartIcon, 
   LaptopIcon, UserCheckIcon, CodeIcon, BellIcon, 
   ShieldCheckIcon, LayoutIcon, MenuIcon, XIcon
 } from 'lucide-react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useGLTF, OrbitControls, Float, PerspectiveCamera, Environment, useEnvironment } from '@react-three/drei';
 
-const FeatureCard = ({ icon: Icon, title, description }) => {
+// Enhanced 3D Models
+const FloatingCube = () => {
+  const mesh = useRef();
+  const { viewport } = useThree();
+
+  useFrame((state, delta) => {
+    mesh.current.rotation.x += delta * 0.2;
+    mesh.current.rotation.y += delta * 0.3;
+    mesh.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
+  });
+
+  return (
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <mesh ref={mesh} scale={viewport.width / 8}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="#4f46e5" roughness={0.3} metalness={0.8} />
+      </mesh>
+    </Float>
+  );
+};
+
+const FloatingTorus = () => {
+  const mesh = useRef();
+  const { viewport } = useThree();
+
+  useFrame((state) => {
+    mesh.current.rotation.x = Math.sin(state.clock.elapsedTime) * 0.2;
+    mesh.current.rotation.y = Math.cos(state.clock.elapsedTime) * 0.2;
+  });
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+      <mesh ref={mesh} scale={viewport.width / 10}>
+        <torusGeometry args={[1, 0.4, 16, 100]} />
+        <meshStandardMaterial color="#4f46e5" roughness={0.2} metalness={0.8} wireframe />
+      </mesh>
+    </Float>
+  );
+};
+
+// Optimized Components
+const FeatureCard = React.memo(({ icon: Icon, title, description }) => {
   return (
     <motion.div
       className="group h-full"
-      whileHover={{ scale: 1.05, rotateY: 10 }}
+      whileHover={{ scale: 1.05, rotateY: 10, z: 50 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <div className="relative bg-white p-8 rounded-xl shadow-lg h-full border border-gray-100 overflow-hidden transform perspective-1000">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+      <div className="relative bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-lg h-full border border-gray-100 overflow-hidden transform perspective-1000">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
         <div className="relative z-10 flex flex-col h-full transform group-hover:translate-z-10">
           <motion.div 
             className="text-blue-600 mb-4"
@@ -29,56 +72,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => {
       </div>
     </motion.div>
   );
-};
-
-const AnimatedCube = () => {
-  return (
-    <div className="cube-container">
-      <div className="cube">
-        <div className="face front"></div>
-        <div className="face back"></div>
-        <div className="face right"></div>
-        <div className="face left"></div>
-        <div className="face top"></div>
-        <div className="face bottom"></div>
-      </div>
-      <style jsx>{`
-        .cube-container {
-          width: 300px;
-          height: 300px;
-          perspective: 1500px;
-          margin: 100px auto;
-        }
-        .cube {
-          width: 100%;
-          height: 100%;
-          position: relative;
-          transform-style: preserve-3d;
-          animation: rotate 20s infinite linear;
-        }
-        .face {
-          position: absolute;
-          width: 300px;
-          height: 300px;
-          background: rgba(59, 130, 246, 0.1);
-          border: 2px solid rgba(59, 130, 246, 0.5);
-          opacity: 0.75;
-          backdrop-filter: blur(5px);
-        }
-        .front  { transform: rotateY(0deg) translateZ(150px); }
-        .back   { transform: rotateY(180deg) translateZ(150px); }
-        .right  { transform: rotateY(90deg) translateZ(150px); }
-        .left   { transform: rotateY(-90deg) translateZ(150px); }
-        .top    { transform: rotateX(90deg) translateZ(150px); }
-        .bottom { transform: rotateX(-90deg) translateZ(150px); }
-        @keyframes rotate {
-          from { transform: rotateX(0deg) rotateY(0deg); }
-          to { transform: rotateX(360deg) rotateY(360deg); }
-        }
-      `}</style>
-    </div>
-  );
-};
+});
 
 const AILearningCycle = () => {
   const [hoveredStep, setHoveredStep] = useState(null);
@@ -110,7 +104,7 @@ const AILearningCycle = () => {
               <stop offset="0%" stopColor="#2563eb" />
               <stop offset="100%" stopColor="#7c3aed" />
             </linearGradient>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <filter id="glow">
               <feGaussianBlur stdDeviation="5" result="coloredBlur" />
               <feMerge>
                 <feMergeNode in="coloredBlur" />
@@ -211,14 +205,16 @@ const AILearningCycle = () => {
   );
 };
 
-
+// Enhanced LearnspireLandingPage Component
 const LearnspireLandingPage = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -257,9 +253,15 @@ const LearnspireLandingPage = () => {
 
   return (
     <div className="font-sans text-gray-900 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       {/* Header Section */}
       <motion.header 
-        className={`bg-white/90 backdrop-blur-md shadow-md fixed w-full z-50 transition-all duration-300 ${scrollY > 100 ? 'py-2' : 'py-4'}`}
+        className={`bg-white/90 backdrop-blur-md shadow-md fixed w-full z-40 transition-all duration-300 ${scrollY > 100 ? 'py-2' : 'py-4'}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
@@ -311,7 +313,7 @@ const LearnspireLandingPage = () => {
             Transform Your Academy with AI-Powered LMS
           </motion.h2>
           <motion.p 
-            className="text-xl md:text-2xl mb-10 text-gray-700 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl mb-10 text-indigo-800 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -328,15 +330,26 @@ const LearnspireLandingPage = () => {
             <ChevronRight className="inline-block ml-2" size={20} />
           </motion.a>
         </div>
-        <AnimatedCube />
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-96 z-0">
+          <Canvas>
+            <Suspense fallback={null}>
+              <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+              <Environment preset="city" />
+              <ambientLight intensity={0.5} />
+              <pointLight position={[10, 10, 10]} />
+              <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+              <FloatingCube />
+            </Suspense>
+          </Canvas>
+        </div>
       </section>
 
       {/* Why Learnspire Section */}
       <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-10"
+            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-10"
+            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -372,7 +385,8 @@ const LearnspireLandingPage = () => {
       <section id="features" className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-6">
           <motion.h3 
-            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-16"
+            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16"
+            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -399,43 +413,43 @@ const LearnspireLandingPage = () => {
 
       {/* AI Learning Cycle Section */}
       <section className="py-20 md:py-32 bg-white">
-  <div className="container mx-auto px-6">
-    <motion.h3 
-      className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-12 md:mb-16"
-      style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }} // Increased line-height for better spacing
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      AI-Powered Learning Cycle
-    </motion.h3>
+        <div className="container mx-auto px-6">
+          <motion.h3 
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-12 md:mb-16"
+            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            AI-Powered Learning Cycle
+          </motion.h3>
 
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      className="max-w-5xl mx-auto"
-    >
-      <AILearningCycle />
-    </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-5xl mx-auto"
+          >
+            <AILearningCycle />
+          </motion.div>
 
-    <motion.p 
-      className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 mt-12 max-w-4xl mx-auto leading-relaxed"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-    >
-      Experience a continuous improvement in learning outcomes with our AI-driven approach. We adapt content delivery, assessment methods, and personalization strategies based on real-time feedback for a more efficient learning journey.
-    </motion.p>
-  </div>
-</section>
-
+          <motion.p 
+            className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 mt-12 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Experience a continuous improvement in learning outcomes with our AI-driven approach. We adapt content delivery, assessment methods, and personalization strategies based on real-time feedback for a more efficient learning journey.
+          </motion.p>
+        </div>
+      </section>
 
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-6">
           <motion.h3 
-            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-blue-700 bg-gradient-to-r from-blue-600 to-indigo-600 mb-16"
+            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16"
+            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -479,37 +493,46 @@ const LearnspireLandingPage = () => {
         </div>
       </section>
 
-     {/* CTA Section */}
-<section id="demo" className="py-20 md:py-32 bg-gradient-to-br from-blue-500 to-indigo-800 text-white">
-  <div className="container mx-auto px-6 text-center">
-    <motion.h3
-      className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight tracking-wide"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      Ready to Transform Your Learning Experience?
-    </motion.h3>
-    <motion.p
-      className="text-lg md:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed md:leading-loose"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-    >
-      Join the AI-powered learning revolution. Book a free demo today and see how Learnspire can elevate your training programs.
-    </motion.p>
-    <motion.a
-      href="#"
-      className="inline-block bg-white text-indigo-700 font-semibold py-4 px-10 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-110 hover:bg-indigo-100"
-      whileHover={{ scale: 1.1, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }}
-      whileTap={{ scale: 0.95 }}
-    >
-      Book Your Free Demo
-      <ChevronRight className="inline-block ml-2" size={22} />
-    </motion.a>
-  </div>
-</section>
-
+      {/* CTA Section */}
+      <section id="demo" className="py-20 md:py-32 bg-gradient-to-br from-blue-500 to-indigo-800 text-white relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.h3
+            className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Ready to Transform Your Learning Experience?
+          </motion.h3>
+          <motion.p
+            className="text-lg md:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed md:leading-loose"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Join the AI-powered learning revolution. Book a free demo today and see how Learnspire can elevate your training programs.
+          </motion.p>
+          <motion.a
+            href="#"
+            className="inline-block bg-white text-indigo-700 font-semibold py-4 px-10 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-110 hover:bg-indigo-100"
+            whileHover={{ scale: 1.1, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Book Your Free Demo
+            <ChevronRight className="inline-block ml-2" size={22} />
+          </motion.a>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full">
+          <Canvas>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} />
+            <OrbitControls enableZoom={false} />
+            <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+              <FloatingTorus />
+            </Float>
+          </Canvas>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
@@ -546,7 +569,7 @@ const LearnspireLandingPage = () => {
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">Twitter</span>
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a 4.095 4.095 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                   </svg>
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -558,8 +581,8 @@ const LearnspireLandingPage = () => {
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-            <p>&copy; 2024 Learnspire. All rights reserved.</p>
+          <div className="mt-12 border-t border-gray-800 pt-8 text-center">
+            <p className="text-gray-400">&copy; 2024 Learnspire. All rights reserved.</p>
           </div>
         </div>
       </footer>
