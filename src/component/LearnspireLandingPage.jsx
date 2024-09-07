@@ -3,6 +3,7 @@ import {
   LaptopIcon, UserCheckIcon, CodeIcon, BellIcon, 
   ShieldCheckIcon, LayoutIcon, MenuIcon, XIcon
 } from 'lucide-react';
+import { useEffect, useState } from 'react'
 
 // eslint-disable-next-line react/prop-types
 const FeatureCard = ({ icon: Icon, title, description }) => {
