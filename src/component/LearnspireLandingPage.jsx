@@ -623,7 +623,7 @@ const LearnspireLandingPage = () => {
               <ul className="space-y-2">
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
                 <li><a href="#features" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
-                <li><a href="#demo" className="text-gray-400 hover:text-white transition-colors">Book a Demo</a></li>
+                <li><a href="#demo" className="text-gray-400 hover:text-white transition-colors">contact us</a></li>
               </ul>
             </div>
             <div>
