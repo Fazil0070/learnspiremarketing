@@ -21,7 +21,7 @@ const FloatingCube = () => {
 
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      <mesh ref={mesh} scale={viewport.width / 8}>
+      <mesh ref={mesh} scale={viewport.width / 10}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#4f46e5" roughness={0.3} metalness={0.8} />
       </mesh>
@@ -40,11 +40,49 @@ const FloatingTorus = () => {
 
   return (
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <mesh ref={mesh} scale={viewport.width / 10}>
+      <mesh ref={mesh} scale={viewport.width / 12}>
         <torusGeometry args={[1, 0.4, 16, 100]} />
         <meshStandardMaterial color="#4f46e5" roughness={0.2} metalness={0.8} wireframe />
       </mesh>
     </Float>
+  );
+};
+
+const FloatingText = () => {
+  const { viewport } = useThree();
+
+  return (
+    <Float speed={1} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Text
+        color="#4f46e5"
+        fontSize={viewport.width / 15}
+        maxWidth={200}
+        lineHeight={1}
+        letterSpacing={0.02}
+        textAlign="center"
+        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+        anchorX="center"
+        anchorY="middle"
+      >
+        WELCOME
+      </Text>
+    </Float>
+  );
+};
+
+const EnhancedScene = () => {
+  return (
+    <>
+      <color attach="background" args={['#050816']} />
+      <fog attach="fog" args={['#050816', 5, 15]} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+      
+      <FloatingCube />
+      <FloatingTorus />
+      <FloatingText />
+    </>
   );
 };
 
@@ -301,49 +339,65 @@ const LearnspireLandingPage = () => {
         )}
       </motion.header>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-blue-100 via-indigo-50 to-white">
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.h2 
-            className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Transform Your Academy with AI-Powered LMS
-          </motion.h2>
-          <motion.p 
-            className="text-xl md:text-2xl mb-10 text-indigo-800 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Advanced Learning Management System for Managing and Scaling Your Training Business in the AI Era
-          </motion.p>
-          <motion.a 
-            href="#demo" 
-            className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+      <section className="relative overflow-hidden py-32 md:py-48 bg-gradient-to-br from-indigo-100 via-purple-100 to-white min-h-screen flex items-center">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight text-indigo-900">
+            Revolutionize Learning with{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              AI-Driven LMS
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-12 text-gray-700 leading-relaxed">
+            Elevate your academy with our advanced, AI-powered learning management system. 
+            Designed to enhance training, boost engagement, and scale efficiently for 
+            unparalleled educational experiences.
+          </p>
+          <motion.a
+            href="#demo"
+            className="group inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg py-5 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-indigo-700 hover:to-purple-700 focus:ring-4 focus:ring-indigo-300 focus:outline-none transform hover:-translate-y-1"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Book a Free Demo
-            <ChevronRight className="inline-block ml-2" size={20} />
+            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1" size={24} />
           </motion.a>
-        </div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-96 z-0">
-          <Canvas>
-            <Suspense fallback={null}>
-              <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-              <Environment preset="city" />
-              <ambientLight intensity={0.5} />
-              <pointLight position={[10, 10, 10]} />
-              <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-              <FloatingCube />
-            </Suspense>
-          </Canvas>
-        </div>
-      </section>
-
+        </motion.div>
+      </div>
+      
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl max-h-[80vh] z-0 opacity-50">
+        <Canvas>
+          <Suspense fallback={null}>
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+            <Environment preset="sunset" />
+            <ambientLight intensity={0.7} />
+            <pointLight position={[10, 10, 10]} />
+            <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
+            <FloatingCube
+              rotation={[0.5, 0.5, 0]}
+              scale={[1.5, 1.5, 1.5]}
+              position={[0, 0, 0]}
+              animate={{
+                y: [-0.5, 0.5, -0.5],
+                rotateY: [0, Math.PI * 2],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </Suspense>
+        </Canvas>
+      </div>
+      
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none" />
+    </section>
       {/* Why Learnspire Section */}
       <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
