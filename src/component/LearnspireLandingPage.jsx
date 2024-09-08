@@ -315,7 +315,7 @@ const LearnspireLandingPage = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Book a Demo
+              Contact Us
             </motion.a>
           </nav>
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-gray-600">
@@ -338,66 +338,79 @@ const LearnspireLandingPage = () => {
           </motion.nav>
         )}
       </motion.header>
+      <section className="relative overflow-hidden py-28 md:py-40 bg-gradient-to-br from-indigo-100 via-purple-100 to-white min-h-screen flex items-center">
+  <div className="container mx-auto px-6 md:px-12 relative z-10">
+    <motion.div
+      className="max-w-4xl mx-auto text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Heading */}
+      <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight text-indigo-900 drop-shadow-lg">
+        Revolutionize Learning with{' '}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+          AI-Driven LMS
+        </span>
+      </h1>
 
-      <section className="relative overflow-hidden py-32 md:py-48 bg-gradient-to-br from-indigo-100 via-purple-100 to-white min-h-screen flex items-center">
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight text-indigo-900">
-            Revolutionize Learning with{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-              AI-Driven LMS
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-12 text-gray-700 leading-relaxed">
-            Elevate your academy with our advanced, AI-powered learning management system. 
-            Designed to enhance training, boost engagement, and scale efficiently for 
-            unparalleled educational experiences.
-          </p>
-          <motion.a
-            href="#demo"
-            className="group inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg py-5 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-indigo-700 hover:to-purple-700 focus:ring-4 focus:ring-indigo-300 focus:outline-none transform hover:-translate-y-1"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Book a Free Demo
-            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1" size={24} />
-          </motion.a>
-        </motion.div>
-      </div>
-      
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl max-h-[80vh] z-0 opacity-50">
-        <Canvas>
-          <Suspense fallback={null}>
-            <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-            <Environment preset="sunset" />
-            <ambientLight intensity={0.7} />
-            <pointLight position={[10, 10, 10]} />
-            <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
-            <FloatingCube
-              rotation={[0.5, 0.5, 0]}
-              scale={[1.5, 1.5, 1.5]}
-              position={[0, 0, 0]}
-              animate={{
-                y: [-0.5, 0.5, -0.5],
-                rotateY: [0, Math.PI * 2],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </Suspense>
-        </Canvas>
-      </div>
-      
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none" />
-    </section>
+      {/* Expanded Paragraph */}
+      <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-800 leading-relaxed">
+        Elevate your academy with our advanced, AI-powered learning management system. 
+        Designed to enhance training, boost engagement, and scale efficiently for 
+        unparalleled educational experiences.
+      </p>
+      <p className="text-lg md:text-xl lg:text-2xl mb-12 text-gray-800 leading-relaxed">
+        Transform the way educators and students interact with dynamic course creation, real-time analytics, 
+        and personalized learning paths that adapt to individual needs.
+      </p>
+
+      {/* Button */}
+      <motion.a
+        href="#demo"
+        className="group inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-base md:text-lg py-4 px-8 md:py-5 md:px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-indigo-700 hover:to-purple-700 focus:ring-4 focus:ring-indigo-300 focus:outline-none transform hover:-translate-y-1"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Contact Us
+        <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
+      </motion.a>
+    </motion.div>
+  </div>
+
+  {/* Cube with Responsive Sizing */}
+  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl sm:max-w-6xl max-h-[80vh] z-0 opacity-60 md:opacity-50">
+    <Canvas>
+      <Suspense fallback={null}>
+        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+        <Environment preset="sunset" />
+        <ambientLight intensity={1} />
+        <pointLight position={[10, 10, 10]} />
+        <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
+        <FloatingCube
+          rotation={[0.5, 0.5, 0]}
+          scale={[2.4, 2.4, 2.4]} // Larger Cube for better visual impact
+          position={[0, 0, 0]}
+          animate={{
+            y: [-0.6, 0.6, -0.6],
+            rotateY: [0, Math.PI * 2],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </Suspense>
+    </Canvas>
+  </div>
+
+  {/* Background Gradient */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none" />
+</section>
+
+
+
       {/* Why Learnspire Section */}
       <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
@@ -547,46 +560,55 @@ const LearnspireLandingPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="demo" className="py-20 md:py-32 bg-gradient-to-br from-blue-500 to-indigo-800 text-white relative overflow-hidden">
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.h3
-            className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Ready to Transform Your Learning Experience?
-          </motion.h3>
-          <motion.p
-            className="text-lg md:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed md:leading-loose"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Join the AI-powered learning revolution. Book a free demo today and see how Learnspire can elevate your training programs.
-          </motion.p>
-          <motion.a
-            href="#"
-            className="inline-block bg-white text-indigo-700 font-semibold py-4 px-10 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-110 hover:bg-indigo-100"
-            whileHover={{ scale: 1.1, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Book Your Free Demo
-            <ChevronRight className="inline-block ml-2" size={22} />
-          </motion.a>
-        </div>
-        <div className="absolute top-0 left-0 w-full h-full">
-          <Canvas>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            <OrbitControls enableZoom={false} />
-            <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-              <FloatingTorus />
-            </Float>
-          </Canvas>
-        </div>
-      </section>
+    {/* CTA Section */}
+<section id="demo" className="relative py-20 md:py-32 bg-gradient-to-br from-blue-600 to-indigo-800 text-white overflow-hidden">
+  <div className="container mx-auto px-6 text-center relative z-10">
+    <motion.h3
+      className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-snug md:leading-tight tracking-wide"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      Ready to Transform Your Learning Experience?
+    </motion.h3>
+
+    <motion.p
+      className="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed text-gray-200"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      Join the AI-powered learning revolution. Book a free demo today and see how Learnspire can elevate your training programs to the next level.
+    </motion.p>
+
+    {/* CTA Button */}
+    <motion.a
+      href="#"
+      className="inline-block bg-white text-indigo-800 font-bold text-lg md:text-xl py-4 px-8 md:py-4 md:px-10 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 hover:bg-indigo-100 focus:ring-4 focus:ring-indigo-400 focus:outline-none"
+      whileHover={{ scale: 1.1, boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.2)" }}
+      whileTap={{ scale: 0.95 }}
+    >
+      Contact Us
+      <ChevronRight className="inline-block ml-2" size={24} />
+    </motion.a>
+  </div>
+
+  {/* 3D Canvas Floating Element */}
+  <div className="absolute inset-0 z-0">
+    <Canvas>
+      <ambientLight intensity={0.7} />
+      <pointLight position={[15, 15, 15]} />
+      <OrbitControls enableZoom={false} />
+      <Float speed={2.5} rotationIntensity={0.8} floatIntensity={0.9}>
+        <FloatingTorus scale={[1.4, 1.4, 1.4]} />
+      </Float>
+    </Canvas>
+  </div>
+
+  {/* Gradient Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-900 opacity-80 pointer-events-none" />
+</section>
+
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
