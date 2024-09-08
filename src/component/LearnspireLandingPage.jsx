@@ -338,79 +338,76 @@ const LearnspireLandingPage = () => {
           </motion.nav>
         )}
       </motion.header>
-      <section className="relative overflow-hidden py-28 md:py-40 bg-gradient-to-br from-indigo-100 via-purple-100 to-white min-h-screen flex items-center">
-  <div className="container mx-auto px-6 md:px-12 relative z-10">
-    <motion.div
-      className="max-w-4xl mx-auto text-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      {/* Heading */}
-      <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight text-indigo-900 drop-shadow-lg">
-        Revolutionize Learning with{' '}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-          AI-Driven LMS
-        </span>
-      </h1>
-
-      {/* Expanded Paragraph */}
-      <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-800 leading-relaxed">
-        Elevate your academy with our advanced, AI-powered learning management system. 
-        Designed to enhance training, boost engagement, and scale efficiently for 
-        unparalleled educational experiences.
-      </p>
-      <p className="text-lg md:text-xl lg:text-2xl mb-12 text-gray-800 leading-relaxed">
-        Transform the way educators and students interact with dynamic course creation, real-time analytics, 
-        and personalized learning paths that adapt to individual needs.
-      </p>
-
-      {/* Button */}
-      <motion.a
-        href="#demo"
-        className="group inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-base md:text-lg py-4 px-8 md:py-5 md:px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-indigo-700 hover:to-purple-700 focus:ring-4 focus:ring-indigo-300 focus:outline-none transform hover:-translate-y-1"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Contact Us
-        <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
-      </motion.a>
-    </motion.div>
-  </div>
-
-  {/* Cube with Responsive Sizing */}
-  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl sm:max-w-6xl max-h-[80vh] z-0 opacity-60 md:opacity-50">
-    <Canvas>
-      <Suspense fallback={null}>
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-        <Environment preset="sunset" />
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} />
-        <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
-        <FloatingCube
-          rotation={[0.5, 0.5, 0]}
-          scale={[2.4, 2.4, 2.4]} // Larger Cube for better visual impact
-          position={[0, 0, 0]}
-          animate={{
-            y: [-0.6, 0.6, -0.6],
-            rotateY: [0, Math.PI * 2],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </Suspense>
-    </Canvas>
-  </div>
-
-  {/* Background Gradient */}
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none" />
-</section>
-
-
-
+      <section className="relative overflow-hidden py-28 md:py-40 bg-gradient-to-br from-violet-50 via-fuchsia-50 to-sky-50 min-h-screen flex items-center">
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Heading */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight text-violet-900 drop-shadow-sm">
+            Revolutionize Learning with{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600">
+              AI-Driven LMS
+            </span>
+          </h1>
+          
+          {/* Expanded Paragraph */}
+          <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-700 leading-relaxed">
+            Elevate your academy with our advanced, AI-powered learning management system. 
+            Designed to enhance training, boost engagement, and scale efficiently for 
+            unparalleled educational experiences.
+          </p>
+          <p className="text-lg md:text-xl lg:text-2xl mb-12 text-gray-700 leading-relaxed">
+            Transform the way educators and students interact with dynamic course creation, real-time analytics, 
+            and personalized learning paths that adapt to individual needs.
+          </p>
+          
+          {/* Button */}
+          <motion.a
+            href="#demo"
+            className="group inline-flex items-center bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-base md:text-lg py-4 px-8 md:py-5 md:px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-violet-700 hover:to-fuchsia-700 focus:ring-4 focus:ring-violet-300 focus:outline-none transform hover:-translate-y-1"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Contact Us
+            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
+          </motion.a>
+        </motion.div>
+      </div>
+      
+      {/* Cube with Responsive Sizing */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl sm:max-w-6xl max-h-[80vh] z-0 opacity-30 md:opacity-40">
+        <Canvas>
+          <Suspense fallback={null}>
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+            <Environment preset="sunset" />
+            <ambientLight intensity={0.8} />
+            <pointLight position={[10, 10, 10]} intensity={1.2} />
+            <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
+            <FloatingCube
+              rotation={[0.5, 0.5, 0]}
+              scale={[2.2, 2.2, 2.2]}
+              position={[0, 0, 0]}
+              animate={{
+                y: [-0.7, 0.7, -0.7],
+                rotateY: [0, Math.PI * 2],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </Suspense>
+        </Canvas>
+      </div>
+      
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none opacity-60" />
+    </section>
       {/* Why Learnspire Section */}
       <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
