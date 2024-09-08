@@ -333,7 +333,7 @@ const LearnspireLandingPage = () => {
             <div className="container mx-auto px-6 flex flex-col space-y-4">
               <a href="#why-learnspire" className="text-gray-600 hover:text-blue-600 transition-colors">Why Learnspire?</a>
               <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
-              <a href="#demo" className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-md hover:from-blue-600 hover:to-indigo-700 transition-all text-center shadow-md hover:shadow-lg">Book a Demo</a>
+              <a href="#demo" className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-md hover:from-blue-600 hover:to-indigo-700 transition-all text-center shadow-md hover:shadow-lg">Contact Us</a>
             </div>
           </motion.nav>
         )}
