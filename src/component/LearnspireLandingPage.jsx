@@ -338,76 +338,127 @@ const LearnspireLandingPage = () => {
           </motion.nav>
         )}
       </motion.header>
-      <section className="relative overflow-hidden py-28 md:py-40 bg-gradient-to-br from-violet-50 via-fuchsia-50 to-sky-50 min-h-screen flex items-center">
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <motion.div
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+{/* Gamified Hero Section */}
+<section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-violet-50 via-fuchsia-50 to-sky-50 min-h-screen flex items-center justify-center">
+  <div className="container mx-auto px-6 md:px-10 relative z-10">
+    <motion.div
+      className="max-w-3xl lg:max-w-4xl mx-auto text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Enhanced Heading */}
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-gray-900 drop-shadow-lg tracking-tight">
+        Embark on a Learning Quest with{' '}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 drop-shadow-md">
+          AI-Driven LMS
+        </span>
+      </h1>
+
+      {/* Gamified Paragraph with subtle animation */}
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed text-gray-800">
+        <motion.span
+          className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          {/* Heading */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight text-violet-900 drop-shadow-sm">
-            Revolutionize Learning with{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600">
-              AI-Driven LMS
-            </span>
-          </h1>
-          
-          {/* Expanded Paragraph */}
-          <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-700 leading-relaxed">
-            Elevate your academy with our advanced, AI-powered learning management system. 
-            Designed to enhance training, boost engagement, and scale efficiently for 
-            unparalleled educational experiences.
-          </p>
-          <p className="text-lg md:text-xl lg:text-2xl mb-12 text-gray-700 leading-relaxed">
-            Transform the way educators and students interact with dynamic course creation, real-time analytics, 
-            and personalized learning paths that adapt to individual needs.
-          </p>
-          
-          {/* Button */}
-          <motion.a
-            href="#demo"
-            className="group inline-flex items-center bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold text-base md:text-lg py-4 px-8 md:py-5 md:px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:from-violet-700 hover:to-fuchsia-700 focus:ring-4 focus:ring-violet-300 focus:outline-none transform hover:-translate-y-1"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contact Us
-            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
-          </motion.a>
-        </motion.div>
+          Unlock New Levels
+        </motion.span>{' '}
+        of engagement and efficiency with our platform, designed to power your learning adventures.
+      </p>
+
+      {/* Animated XP Progress */}
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 leading-relaxed text-gray-800">
+        Progress through{' '}
+        <motion.span
+          className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-violet-600"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          personalized learning paths
+        </motion.span>{' '}
+        and gain XP with every test, quiz, and course completed.
+      </p>
+
+      {/* Circular Progress Bar */}
+      <div className="relative mx-auto w-20 h-20 mb-6">
+        <svg className="absolute top-0 left-0 w-full h-full">
+          <circle
+            cx="50%"
+            cy="50%"
+            r="45%"
+            stroke="url(#gradient)"
+            strokeWidth="8"
+            fill="none"
+            strokeLinecap="round"
+            className="animate-progress"
+          />
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" className="text-violet-600" stopColor="#7C3AED" />
+              <stop offset="100%" className="text-fuchsia-600" stopColor="#D946EF" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-800">Level 3</div>
       </div>
-      
-      {/* Cube with Responsive Sizing */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl sm:max-w-6xl max-h-[80vh] z-0 opacity-30 md:opacity-40">
-        <Canvas>
-          <Suspense fallback={null}>
-            <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-            <Environment preset="sunset" />
-            <ambientLight intensity={0.8} />
-            <pointLight position={[10, 10, 10]} intensity={1.2} />
-            <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
-            <FloatingCube
-              rotation={[0.5, 0.5, 0]}
-              scale={[2.2, 2.2, 2.2]}
-              position={[0, 0, 0]}
-              animate={{
-                y: [-0.7, 0.7, -0.7],
-                rotateY: [0, Math.PI * 2],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </Suspense>
-        </Canvas>
-      </div>
-      
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none opacity-60" />
-    </section>
+
+      {/* Enhanced Button with Glow Effect */}
+      <motion.a
+        href="#demo"
+        className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-3 px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:bg-glow focus:ring-4 focus:ring-fuchsia-300 focus:outline-none"
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.97 }}
+      >
+        Contact Us
+        <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={22} />
+      </motion.a>
+    </motion.div>
+  </div>
+
+  {/* Enhanced Background Elements */}
+  <div className="absolute inset-0 flex justify-center items-center overflow-hidden z-0 opacity-20">
+    <div className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-fuchsia-200 via-violet-200 to-sky-200 blur-[150px] opacity-50 animate-pulse" />
+    <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-sky-200 via-fuchsia-200 to-violet-200 blur-[200px] opacity-40 animate-bounce" />
+  </div>
+
+  {/* Floating Cube Animation */}
+  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl md:max-w-5xl max-h-[70vh] z-0 opacity-25 md:opacity-35">
+    <Canvas>
+      <Suspense fallback={null}>
+        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+        <Environment preset="sunset" />
+        <ambientLight intensity={0.9} />
+        <pointLight position={[10, 10, 10]} intensity={1.4} />
+        <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
+        <FloatingCube
+          rotation={[0.5, 0.5, 0]}
+          scale={[2.5, 2.5, 2.5]} 
+          position={[0, 0, 0]}
+          animate={{
+            y: [-1, 1, -1],
+            rotateY: [0, Math.PI * 2],
+            rotateX: [0, Math.PI * 2],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </Suspense>
+    </Canvas>
+  </div>
+
+  {/* Particle Interaction */}
+  <div className="absolute inset-0 z-10 pointer-events-none">
+    <div className="particles absolute w-full h-full opacity-20"></div>
+  </div>
+
+  {/* Soft Gradient Layer */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none opacity-60" />
+</section>
+
       {/* Why Learnspire Section */}
       <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
