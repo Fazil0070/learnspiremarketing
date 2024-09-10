@@ -338,8 +338,7 @@ const LearnspireLandingPage = () => {
           </motion.nav>
         )}
       </motion.header>
-{/* Gamified Hero Section */}
-<section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-violet-50 via-fuchsia-50 to-sky-50 min-h-screen flex items-center justify-center">
+      <section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-violet-200 via-fuchsia-100 to-indigo-200 min-h-screen flex items-center justify-center">
   <div className="container mx-auto px-6 md:px-10 relative z-10">
     <motion.div
       className="max-w-3xl lg:max-w-4xl mx-auto text-center"
@@ -348,69 +347,65 @@ const LearnspireLandingPage = () => {
       transition={{ duration: 0.8 }}
     >
       {/* Enhanced Heading */}
-      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-gray-900 drop-shadow-lg tracking-tight">
-        Embark on a Learning Quest with{' '}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600 drop-shadow-md">
-          AI-Driven LMS
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-violet-900 drop-shadow-lg tracking-tight">
+        Level Up Your Learning with{' '}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 drop-shadow-md">
+          AI-Powered LMS
         </span>
       </h1>
 
       {/* Gamified Paragraph with subtle animation */}
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed text-gray-800">
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed text-gray-600">
         <motion.span
-          className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600"
+          className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-500"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          Unlock New Levels
+          Conquer New Challenges
         </motion.span>{' '}
-        of engagement and efficiency with our platform, designed to power your learning adventures.
+        and earn rewards as you progress through our interactive learning quests.
       </p>
 
-      {/* Animated XP Progress */}
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 leading-relaxed text-gray-800">
-        Progress through{' '}
-        <motion.span
-          className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-violet-600"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          personalized learning paths
-        </motion.span>{' '}
-        and gain XP with every test, quiz, and course completed.
-      </p>
+      {/* XP and Level Display */}
+      <div className="flex justify-center items-center mb-8 space-x-4">
+        <div className="bg-violet-600 rounded-lg p-3 text-white">
+          <span className="text-xl font-bold">XP: 1250</span>
+        </div>
+        <div className="bg-fuchsia-600 rounded-lg p-3 text-white">
+          <span className="text-xl font-bold">Level: 5</span>
+        </div>
+      </div>
 
-      {/* Circular Progress Bar */}
-      <div className="relative mx-auto w-20 h-20 mb-6">
-        <svg className="absolute top-0 left-0 w-full h-full">
-          <circle
-            cx="50%"
-            cy="50%"
-            r="45%"
-            stroke="url(#gradient)"
-            strokeWidth="8"
-            fill="none"
-            strokeLinecap="round"
-            className="animate-progress"
-          />
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" className="text-violet-600" stopColor="#7C3AED" />
-              <stop offset="100%" className="text-fuchsia-600" stopColor="#D946EF" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-800">Level 3</div>
+      {/* Progress Bar */}
+      <div className="w-full max-w-md mx-auto mb-8 bg-gray-300 rounded-full h-4 overflow-hidden">
+        <div 
+          className="bg-gradient-to-r from-yellow-400 to-orange-500 h-full rounded-full transition-all duration-1000 ease-out"
+          style={{ width: '70%' }}
+        />
+      </div>
+
+      {/* Achievement Badges */}
+      <div className="flex justify-center space-x-4 mb-8">
+        {['🏆', '🌟', '🎓', '🚀'].map((emoji, index) => (
+          <motion.div
+            key={index}
+            className="bg-indigo-300 rounded-full p-2 text-2xl"
+            whileHover={{ scale: 1.2, rotate: 360 }}
+            transition={{ duration: 0.5 }}
+          >
+            {emoji}
+          </motion.div>
+        ))}
       </div>
 
       {/* Enhanced Button with Glow Effect */}
       <motion.a
         href="#demo"
-        className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-3 px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:bg-glow focus:ring-4 focus:ring-fuchsia-300 focus:outline-none"
-        whileHover={{ scale: 1.15 }}
-        whileTap={{ scale: 0.97 }}
+        className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-3 px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 focus:outline-none"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        Contact Us
+        Start Your Quest
         <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={22} />
       </motion.a>
     </motion.div>
@@ -418,8 +413,8 @@ const LearnspireLandingPage = () => {
 
   {/* Enhanced Background Elements */}
   <div className="absolute inset-0 flex justify-center items-center overflow-hidden z-0 opacity-20">
-    <div className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-fuchsia-200 via-violet-200 to-sky-200 blur-[150px] opacity-50 animate-pulse" />
-    <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-sky-200 via-fuchsia-200 to-violet-200 blur-[200px] opacity-40 animate-bounce" />
+    <div className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-fuchsia-200 via-violet-200 to-indigo-200 blur-[150px] opacity-30 animate-pulse" />
+    <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-indigo-200 via-fuchsia-200 to-violet-200 blur-[200px] opacity-30 animate-bounce" />
   </div>
 
   {/* Floating Cube Animation */}
@@ -456,7 +451,7 @@ const LearnspireLandingPage = () => {
   </div>
 
   {/* Soft Gradient Layer */}
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-5 pointer-events-none opacity-60" />
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-violet-200 z-5 pointer-events-none opacity-60" />
 </section>
 
       {/* Why Learnspire Section */}
