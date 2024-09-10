@@ -453,7 +453,6 @@ const LearnspireLandingPage = () => {
   {/* Soft Gradient Layer */}
   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-violet-200 z-5 pointer-events-none opacity-60" />
 </section>
-
       {/* Why Learnspire Section */}
       <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
         <div className="container mx-auto px-6">
