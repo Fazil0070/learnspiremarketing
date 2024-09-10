@@ -338,157 +338,254 @@ const LearnspireLandingPage = () => {
           </motion.nav>
         )}
       </motion.header>
-      <section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-violet-200 via-fuchsia-100 to-indigo-200 min-h-screen flex items-center justify-center">
-  <div className="container mx-auto px-6 md:px-10 relative z-10">
-    <motion.div
-      className="max-w-3xl lg:max-w-4xl mx-auto text-center"
+      <section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen flex items-center justify-center">
+      <div className="container mx-auto px-6 md:px-10 relative z-10">
+        <motion.div
+          className="max-w-3xl lg:max-w-4xl mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Enhanced Heading with Animated Underline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-indigo-900 drop-shadow-lg tracking-tight">
+            Level Up Your Learning with{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 drop-shadow-md relative inline-block">
+              AI-Powered LMS
+              <motion.span
+                className="absolute bottom-0 left-0 w-full h-1 bg-pink-500"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
+            </span>
+          </h1>
+
+          {/* Enhanced Paragraph with Animation */}
+          <motion.p 
+            className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 leading-relaxed text-indigo-800"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.span
+              className="bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-emerald-600 inline-block font-semibold"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              Conquer New Challenges
+            </motion.span>{' '}
+            and earn rewards as you progress through our interactive learning quests.
+          </motion.p>
+
+          {/* Enhanced XP and Level Display */}
+          <div className="flex justify-center items-center mb-8 space-x-4">
+            <motion.div 
+              className="bg-indigo-600 rounded-lg p-3 text-white shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <span className="text-xl font-bold">XP: 1250</span>
+            </motion.div>
+            <motion.div 
+              className="bg-purple-600 rounded-lg p-3 text-white shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <span className="text-xl font-bold">Level: 5</span>
+            </motion.div>
+          </div>
+
+          {/* Enhanced Progress Bar with Animation */}
+          <div className="w-full max-w-md mx-auto mb-8 bg-indigo-200 rounded-full h-4 overflow-hidden shadow-inner">
+            <motion.div 
+              className="bg-gradient-to-r from-teal-400 to-emerald-500 h-full rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: '70%' }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            />
+          </div>
+
+          {/* Enhanced Achievement Badges */}
+          <div className="flex justify-center space-x-4 mb-8">
+            {['🏆', '🌟', '🎓', '🚀'].map((emoji, index) => (
+              <motion.div
+                key={index}
+                className="bg-pink-200 rounded-full p-2 text-2xl shadow-lg"
+                whileHover={{ scale: 1.2, rotate: 360 }}
+                transition={{ duration: 0.5 }}
+              >
+                {emoji}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Enhanced Button with Glow Effect */}
+          <motion.a
+            href="#demo"
+            className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-3 px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 focus:outline-none relative overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10">Start Your Quest</span>
+            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={22} />
+            <motion.div
+              className="absolute inset-0 bg-white opacity-25"
+              initial={{ scale: 0, x: "100%" }}
+              animate={{ scale: 1.5, x: "-100%" }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+            />
+          </motion.a>
+        </motion.div>
+      </div>
+
+      {/* Enhanced Background Elements */}
+      <div className="absolute inset-0 flex justify-center items-center overflow-hidden z-0 opacity-30">
+        <motion.div
+          className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-purple-200 via-indigo-200 to-pink-200 blur-[150px] opacity-30"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            rotate: 360
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
+        <motion.div
+          className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-pink-200 via-purple-200 to-indigo-200 blur-[200px] opacity-30"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: -360
+          }}
+          transition={{ 
+            duration: 25, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        />
+      </div>
+
+      {/* New Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(10)].map((_, index) => (
+          <motion.div
+            key={index}
+            className="absolute w-4 h-4 rounded-full bg-white opacity-50"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Soft Gradient Layer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-indigo-100 z-5 pointer-events-none opacity-60" />
+    </section>
+    {/* why choose*/}
+    <section id="why-learnspire" className="py-20 md:py-32 bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.h2
+      className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-10"
+      style={{ 
+        WebkitTextStroke: '1px rgba(59, 130, 246, 0.1)', 
+        lineHeight: '1.3',
+        textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Enhanced Heading */}
-      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-violet-900 drop-shadow-lg tracking-tight">
-        Level Up Your Learning with{' '}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 drop-shadow-md">
-          AI-Powered LMS
-        </span>
-      </h1>
-
-      {/* Gamified Paragraph with subtle animation */}
-      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed text-gray-600">
-        <motion.span
-          className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-500"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          Conquer New Challenges
-        </motion.span>{' '}
-        and earn rewards as you progress through our interactive learning quests.
-      </p>
-
-      {/* XP and Level Display */}
-      <div className="flex justify-center items-center mb-8 space-x-4">
-        <div className="bg-violet-600 rounded-lg p-3 text-white">
-          <span className="text-xl font-bold">XP: 1250</span>
-        </div>
-        <div className="bg-fuchsia-600 rounded-lg p-3 text-white">
-          <span className="text-xl font-bold">Level: 5</span>
-        </div>
-      </div>
-
-      {/* Progress Bar */}
-      <div className="w-full max-w-md mx-auto mb-8 bg-gray-300 rounded-full h-4 overflow-hidden">
-        <div 
-          className="bg-gradient-to-r from-yellow-400 to-orange-500 h-full rounded-full transition-all duration-1000 ease-out"
-          style={{ width: '70%' }}
-        />
-      </div>
-
-      {/* Achievement Badges */}
-      <div className="flex justify-center space-x-4 mb-8">
-        {['🏆', '🌟', '🎓', '🚀'].map((emoji, index) => (
-          <motion.div
-            key={index}
-            className="bg-indigo-300 rounded-full p-2 text-2xl"
-            whileHover={{ scale: 1.2, rotate: 360 }}
-            transition={{ duration: 0.5 }}
-          >
-            {emoji}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Enhanced Button with Glow Effect */}
-      <motion.a
-        href="#demo"
-        className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-3 px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 focus:outline-none"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Start Your Quest
-        <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2" size={22} />
-      </motion.a>
+      Why Choose Learnspire?
+    </motion.h2>
+    
+    {/* Feature Cards with hover interaction */}
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-3 gap-12"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      <FeatureCard
+        icon={RocketIcon}
+        title="Accelerate Learning"
+        description="Boost engagement and completion rates with AI-enhanced interactive features."
+        className="transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      />
+      <FeatureCard
+        icon={GitBranchIcon}
+        title="Personalized Paths"
+        description="Tailor learning journeys with AI-driven recommendations based on individual progress."
+        className="transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      />
+      <FeatureCard
+        icon={BarChartIcon}
+        title="AI-Powered Analytics"
+        description="Gain insights with detailed, AI-driven reports on learner performance and outcomes."
+        className="transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      />
     </motion.div>
   </div>
 
-  {/* Enhanced Background Elements */}
-  <div className="absolute inset-0 flex justify-center items-center overflow-hidden z-0 opacity-20">
-    <div className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-fuchsia-200 via-violet-200 to-indigo-200 blur-[150px] opacity-30 animate-pulse" />
-    <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-indigo-200 via-fuchsia-200 to-violet-200 blur-[200px] opacity-30 animate-bounce" />
-  </div>
+  {/* Enhanced Floating Shapes */}
+  <motion.div
+    className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400 rounded-full opacity-20 shadow-lg"
+    animate={{
+      y: [0, -20, 0],
+      rotate: [0, 360],
+      scale: [1, 1.1, 1],
+    }}
+    transition={{
+      duration: 10,
+      repeat: Infinity,
+      repeatType: "reverse",
+    }}
+  />
+  <motion.div
+    className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-indigo-400 rounded-lg opacity-20 shadow-lg"
+    animate={{
+      x: [0, 20, 0],
+      rotate: [0, -360],
+      scale: [1, 1.2, 1],
+    }}
+    transition={{
+      duration: 12,
+      repeat: Infinity,
+      repeatType: "reverse",
+    }}
+  />
 
-  {/* Floating Cube Animation */}
-  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl md:max-w-5xl max-h-[70vh] z-0 opacity-25 md:opacity-35">
-    <Canvas>
-      <Suspense fallback={null}>
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-        <Environment preset="sunset" />
-        <ambientLight intensity={0.9} />
-        <pointLight position={[10, 10, 10]} intensity={1.4} />
-        <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
-        <FloatingCube
-          rotation={[0.5, 0.5, 0]}
-          scale={[2.5, 2.5, 2.5]} 
-          position={[0, 0, 0]}
-          animate={{
-            y: [-1, 1, -1],
-            rotateY: [0, Math.PI * 2],
-            rotateX: [0, Math.PI * 2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </Suspense>
-    </Canvas>
+  {/* Additional Floating Shapes */}
+  <motion.div
+    className="absolute top-1/3 right-1/3 w-20 h-20 bg-indigo-300 rounded-full opacity-20 shadow-lg"
+    animate={{
+      x: [0, -20, 0],
+      rotate: [0, 180],
+      scale: [1, 1.15, 1],
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      repeatType: "reverse",
+    }}
+  />
+  
+  {/* Particle Effects */}
+  <div className="absolute inset-0 pointer-events-none">
+    <div className="particles absolute w-full h-full bg-gradient-to-b from-transparent via-transparent to-indigo-100 opacity-10"></div>
   </div>
-
-  {/* Particle Interaction */}
-  <div className="absolute inset-0 z-10 pointer-events-none">
-    <div className="particles absolute w-full h-full opacity-20"></div>
-  </div>
-
-  {/* Soft Gradient Layer */}
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-violet-200 z-5 pointer-events-none opacity-60" />
 </section>
-      {/* Why Learnspire Section */}
-      <section id="why-learnspire" className="py-20 md:py-32 bg-white-100">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-10"
-            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Why Choose Learnspire?
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <FeatureCard
-              icon={RocketIcon}
-              title="Accelerate Learning"
-              description="Boost engagement and completion rates with AI-enhanced interactive features."
-            />
-            <FeatureCard
-              icon={GitBranchIcon}
-              title="Personalized Paths"
-              description="Tailor learning journeys with AI-driven recommendations based on individual progress."
-            />
-            <FeatureCard
-              icon={BarChartIcon}
-              title="AI-Powered Analytics"
-              description="Gain insights with detailed, AI-driven reports on learner performance and outcomes."
-            />
-          </motion.div>
-        </div>
-      </section>
 
       {/* Features Section */}
       <section id="features" className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
@@ -603,55 +700,53 @@ const LearnspireLandingPage = () => {
       </section>
 
     {/* CTA Section */}
-<section id="demo" className="relative py-20 md:py-32 bg-gradient-to-br from-blue-600 to-indigo-800 text-white overflow-hidden">
-  <div className="container mx-auto px-6 text-center relative z-10">
-    <motion.h3
-      className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-snug md:leading-tight tracking-wide"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      Ready to Transform Your Learning Experience?
-    </motion.h3>
-
-    <motion.p
-      className="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed text-gray-200"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-    >
-      Join the AI-powered learning revolution. Book a free demo today and see how Learnspire can elevate your training programs to the next level.
-    </motion.p>
-
-    {/* CTA Button */}
-    <motion.a
-      href="#"
-      className="inline-block bg-white text-indigo-800 font-bold text-lg md:text-xl py-4 px-8 md:py-4 md:px-10 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 hover:bg-indigo-100 focus:ring-4 focus:ring-indigo-400 focus:outline-none"
-      whileHover={{ scale: 1.1, boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.2)" }}
-      whileTap={{ scale: 0.95 }}
-    >
-      Contact Us
-      <ChevronRight className="inline-block ml-2" size={24} />
-    </motion.a>
-  </div>
-
-  {/* 3D Canvas Floating Element */}
-  <div className="absolute inset-0 z-0">
-    <Canvas>
-      <ambientLight intensity={0.7} />
-      <pointLight position={[15, 15, 15]} />
-      <OrbitControls enableZoom={false} />
-      <Float speed={2.5} rotationIntensity={0.8} floatIntensity={0.9}>
-        <FloatingTorus scale={[1.4, 1.4, 1.4]} />
-      </Float>
-    </Canvas>
-  </div>
-
-  {/* Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-900 opacity-80 pointer-events-none" />
-</section>
-
-
+    <section className="relative py-20 md:py-32 bg-gradient-to-br from-purple-700 to-indigo-900 text-white overflow-hidden">
+      <div className="container mx-auto px-6 text-center relative z-10">
+        <motion.h3
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-snug md:leading-tight tracking-wide"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Level Up Your Learning Adventure!
+        </motion.h3>
+        
+        <motion.p
+          className="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed text-gray-200"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Embark on an AI-powered quest to master new skills. Earn achievements, climb leaderboards, and unlock learning power-ups along the way!
+        </motion.p>
+        
+        <motion.a
+          href="#"
+          className="inline-block bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold text-lg md:text-xl py-4 px-8 md:py-5 md:px-12 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 relative overflow-hidden group"
+          whileHover={{ scale: 1.05, boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.2)" }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span className="relative z-10 flex items-center justify-center">
+            Start Your Quest
+            <ChevronRight className="inline-block ml-2" size={24} />
+          </span>
+          <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
+        </motion.a>
+      </div>
+      
+      <div className="absolute inset-0 z-0">
+        <Canvas>
+          <ambientLight intensity={0.7} />
+          <pointLight position={[15, 15, 15]} />
+          <OrbitControls enableZoom={false} />
+          <Float speed={2.5} rotationIntensity={0.8} floatIntensity={0.9}>
+            <FloatingCube />
+          </Float>
+        </Canvas>
+      </div>
+      
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-900 opacity-80 pointer-events-none" />
+    </section>
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-6">
