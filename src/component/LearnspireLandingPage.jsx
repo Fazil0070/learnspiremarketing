@@ -588,131 +588,177 @@ const LearnspireLandingPage = () => {
 </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
-        <div className="container mx-auto px-6">
-          <motion.h3 
-            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16"
-            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Cutting-Edge Features
-          </motion.h3>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {features.map((feature, index) => (
-              <FeatureCard
-                key={index}
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-              />
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      <section id="features" className="py-20 md:py-32 bg-gradient-to-b from-blue-100 via-purple-100 to-indigo-100 relative overflow-hidden perspective-1000">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.h3
+          className="text-4xl md:text-5xl font-bold text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600">
+            Unlock Epic Features
+          </span>
+        </motion.h3>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-2xl hover:scale-105"
+              initial={{ opacity: 0, y: 20, rotateX: -15, rotateY: -15 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ rotateX: 5, rotateY: 5 }}
+            >
+              <div className="flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-500 rounded-2xl transform rotate-3 shadow-lg">
+                <feature.icon size={36} className="text-white transform -rotate-3" />
+              </div>
+              <h4 className="text-2xl font-semibold mb-4 text-gray-800">{feature.title}</h4>
+              <p className="text-gray-600">{feature.description}</p>
+              <motion.button
+                className="mt-6 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-semibold transform transition-transform duration-200 hover:scale-105"
+                whileHover={{ y: -3 }}
+                whileTap={{ y: 0 }}
+              >
+                Level Up
+              </motion.button>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" />
+        <div className="absolute top-1/3 right-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-4000" />
+      </div>
+    </section>
 
       {/* AI Learning Cycle Section */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <motion.h3 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-12 md:mb-16"
-            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+      <section className="py-20 md:py-32 bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.h3
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
             AI-Powered Learning Cycle
-          </motion.h3>
+          </span>
+        </motion.h3>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-5xl mx-auto"
-          >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, rotateX: -15 }}
+          animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="max-w-5xl mx-auto transform hover:scale-105 transition-transform duration-300"
+        >
+          <div className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl p-8">
             <AILearningCycle />
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.p 
-            className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 mt-12 max-w-4xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+        <motion.p
+          className="text-center text-lg md:text-xl lg:text-2xl text-gray-700 mt-12 max-w-4xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          Experience a continuous improvement in learning outcomes with our AI-driven approach. 
+          We adapt content delivery, assessment methods, and personalization strategies based on 
+          real-time feedback for a more efficient learning journey.
+        </motion.p>
+
+        <div className="flex justify-center mt-12">
+          <motion.button
+            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full font-bold text-lg shadow-lg"
+            whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)" }}
+            whileTap={{ y: 0 }}
           >
-            Experience a continuous improvement in learning outcomes with our AI-driven approach. We adapt content delivery, assessment methods, and personalization strategies based on real-time feedback for a more efficient learning journey.
-          </motion.p>
+            Start Your AI Learning Adventure
+          </motion.button>
         </div>
-      </section>
+      </div>
+
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" />
+        <div className="absolute top-1/3 right-4 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-4000" />
+      </div>
+    </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-blue-50 to-white">
-        <div className="container mx-auto px-6">
-          <motion.h3 
-            className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-16"
-            style={{ WebkitTextStroke: '1px transparent', lineHeight: '1.3' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            What Our Clients Say
-          </motion.h3>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {/* Testimonial 1 */}
+      <section className="py-20 md:py-32 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative">
+        <motion.h2
+          className="text-5xl md:text-6xl font-bold text-center text-indigo-800 mb-16"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
+        >
+          Player Testimonials
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              emoji: "⭐",
+              content: "Learnspire has leveled up our training program! The AI features have boosted our XP and engagement stats significantly.",
+              author: "Sarah Johnson",
+              role: "Guild Master at TechEd Solutions"
+            },
+            {
+              emoji: "🏆",
+              content: "The personalized learning quests have been our secret weapon. We've seen a 40% increase in quest completion rates!",
+              author: "Mark Thompson",
+              role: "Lorekeeper at Global Learning Institute"
+            },
+            {
+              emoji: "🧙‍♂️",
+              content: "Learnspire's analytics are like having a high-level mage on the team. We've unlocked unprecedented insights into our learners' progress.",
+              author: "Lisa Chen",
+              role: "Strategy Master at InnovateCore"
+            }
+          ].map((testimonial, index) => (
             <motion.div 
-              className="bg-white p-8 rounded-xl shadow-lg"
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              key={index}
+              className="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <p className="text-gray-600 mb-4">"Learnspire has revolutionized our training program. The AI-powered features have significantly improved engagement and outcomes."</p>
-              <p className="font-semibold text-gray-800">- Sarah Johnson, CEO of TechEd Solutions</p>
+              <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">{testimonial.emoji}</div>
+              <p className="text-gray-700 mb-4 text-lg italic">"{testimonial.content}"</p>
+              <div className="text-right">
+                <p className="font-semibold text-indigo-800">{testimonial.author}</p>
+                <p className="text-sm text-gray-600">{testimonial.role}</p>
+              </div>
+              <div className="absolute -bottom-6 -right-6 text-9xl opacity-10 transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300">
+                {testimonial.emoji}
+              </div>
             </motion.div>
-            {/* Testimonial 2 */}
-            <motion.div 
-              className="bg-white p-8 rounded-xl shadow-lg"
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <p className="text-gray-600 mb-4">"The personalized learning paths have been a game-changer for our students. We've seen a 40% increase in course completion rates."</p>
-              <p className="font-semibold text-gray-800">- Mark Thompson, Director at Global Learning Institute</p>
-            </motion.div>
-            {/* Testimonial 3 */}
-            <motion.div 
-              className="bg-white p-8 rounded-xl shadow-lg"
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <p className="text-gray-600 mb-4">"Learnspire's analytics have given us unprecedented insights into our learners' progress. It's like having a data scientist on the team."</p>
-              <p className="font-semibold text-gray-800">- Lisa Chen, L&D Manager at InnovateCore</p>
-            </motion.div>
-          </motion.div>
+          ))}
         </div>
-      </section>
-
+      </div>
+    </section>
     {/* CTA Section */}
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-purple-700 to-indigo-900 text-white overflow-hidden">
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <motion.h3
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-snug md:leading-tight tracking-wide"
+    <section className="relative py-20 md:py-32 bg-gradient-to-br from-blue-50 to-purple-100 overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.h2
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-wide text-indigo-800 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           Level Up Your Learning Adventure!
-        </motion.h3>
+        </motion.h2>
         
         <motion.p
-          className="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed text-gray-200"
+          className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed text-indigo-700 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -720,32 +766,64 @@ const LearnspireLandingPage = () => {
           Embark on an AI-powered quest to master new skills. Earn achievements, climb leaderboards, and unlock learning power-ups along the way!
         </motion.p>
         
-        <motion.a
-          href="#"
-          className="inline-block bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold text-lg md:text-xl py-4 px-8 md:py-5 md:px-12 rounded-full transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 relative overflow-hidden group"
-          whileHover={{ scale: 1.05, boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.2)" }}
-          whileTap={{ scale: 0.95 }}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <span className="relative z-10 flex items-center justify-center">
-            Start Your Quest
-            <ChevronRight className="inline-block ml-2" size={24} />
-          </span>
-          <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
-        </motion.a>
+          <motion.div
+            className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-sm rounded-xl p-6 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="text-6xl mb-4" role="img" aria-label="Power-Ups">⚡</span>
+            <h3 className="text-2xl font-bold mb-2 text-indigo-800">Power-Ups</h3>
+            <p className="text-indigo-600 text-center">Unlock special abilities to supercharge your learning journey</p>
+          </motion.div>
+
+          <motion.div
+            className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-sm rounded-xl p-6 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="text-6xl mb-4" role="img" aria-label="Achievements">🏆</span>
+            <h3 className="text-2xl font-bold mb-2 text-indigo-800">Achievements</h3>
+            <p className="text-indigo-600 text-center">Collect badges and trophies as you conquer new skills</p>
+          </motion.div>
+
+          <motion.div
+            className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-sm rounded-xl p-6 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="text-6xl mb-4" role="img" aria-label="Leaderboards">🌟</span>
+            <h3 className="text-2xl font-bold mb-2 text-indigo-800">Leaderboards</h3>
+            <p className="text-indigo-600 text-center">Compete with friends and chart your learning progress</p>
+          </motion.div>
+        </motion.div>
+        
+        <div className="text-center">
+          <motion.a
+            href="#"
+            className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-xl py-4 px-8 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300 relative overflow-hidden group"
+            whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10 flex items-center justify-center">
+              Start Your Quest
+              <span className="ml-2" role="img" aria-label="Right arrow">➡️</span>
+            </span>
+            <span className="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
+          </motion.a>
+        </div>
       </div>
       
-      <div className="absolute inset-0 z-0">
-        <Canvas>
-          <ambientLight intensity={0.7} />
-          <pointLight position={[15, 15, 15]} />
-          <OrbitControls enableZoom={false} />
-          <Float speed={2.5} rotationIntensity={0.8} floatIntensity={0.9}>
-            <FloatingCube />
-          </Float>
-        </Canvas>
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div className="absolute top-1/3 right-4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000" />
       </div>
-      
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-900 opacity-80 pointer-events-none" />
     </section>
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
