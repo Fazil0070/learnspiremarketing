@@ -1,93 +1,16 @@
-import React, { useEffect, useState, useRef, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ChevronRight, RocketIcon, GitBranchIcon, BarChartIcon, 
-  LaptopIcon, UserCheckIcon, CodeIcon, BellIcon, 
-  ShieldCheckIcon, LayoutIcon, MenuIcon, XIcon
+   MenuIcon, XIcon , BrainIcon, UsersIcon, ShieldIcon
 } from 'lucide-react';
-import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useGLTF, OrbitControls, Float, PerspectiveCamera, Environment, useEnvironment } from '@react-three/drei';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import aqueelImage from '../assets/aqueel.jpeg';  
+import fazilImage from '../assets/Fazil.jpeg'
+import akashImage from '../assets/Akash.jpeg'
 
-// Enhanced 3D Models
-const FloatingCube = () => {
-  const mesh = useRef();
-  const { viewport } = useThree();
-
-  useFrame((state, delta) => {
-    mesh.current.rotation.x += delta * 0.2;
-    mesh.current.rotation.y += delta * 0.3;
-    mesh.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      <mesh ref={mesh} scale={viewport.width / 10}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="#4f46e5" roughness={0.3} metalness={0.8} />
-      </mesh>
-    </Float>
-  );
-};
-
-const FloatingTorus = () => {
-  const mesh = useRef();
-  const { viewport } = useThree();
-
-  useFrame((state) => {
-    mesh.current.rotation.x = Math.sin(state.clock.elapsedTime) * 0.2;
-    mesh.current.rotation.y = Math.cos(state.clock.elapsedTime) * 0.2;
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <mesh ref={mesh} scale={viewport.width / 12}>
-        <torusGeometry args={[1, 0.4, 16, 100]} />
-        <meshStandardMaterial color="#4f46e5" roughness={0.2} metalness={0.8} wireframe />
-      </mesh>
-    </Float>
-  );
-};
-
-const FloatingText = () => {
-  const { viewport } = useThree();
-
-  return (
-    <Float speed={1} rotationIntensity={0.5} floatIntensity={0.5}>
-      <Text
-        color="#4f46e5"
-        fontSize={viewport.width / 15}
-        maxWidth={200}
-        lineHeight={1}
-        letterSpacing={0.02}
-        textAlign="center"
-        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
-        anchorX="center"
-        anchorY="middle"
-      >
-        WELCOME
-      </Text>
-    </Float>
-  );
-};
-
-const EnhancedScene = () => {
-  return (
-    <>
-      <color attach="background" args={['#050816']} />
-      <fog attach="fog" args={['#050816', 5, 15]} />
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} />
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-      
-      <FloatingCube />
-      <FloatingTorus />
-      <FloatingText />
-    </>
-  );
-};
 
 // Optimized Components
-const FeatureCard = React.memo(({ icon: Icon, title, description }) => {
+const FeatureCard = React.memo(({ emoji, title, description }) => {
   return (
     <motion.div
       className="group h-full"
@@ -97,12 +20,12 @@ const FeatureCard = React.memo(({ icon: Icon, title, description }) => {
       <div className="relative bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-lg h-full border border-gray-100 overflow-hidden transform perspective-1000">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
         <div className="relative z-10 flex flex-col h-full transform group-hover:translate-z-10">
-          <motion.div 
-            className="text-blue-600 mb-4"
+          <motion.div
+            className="text-5xl mb-4"
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.5 }}
           >
-            <Icon size={40} />
+            {emoji}
           </motion.div>
           <h4 className="text-2xl font-bold text-gray-800 mb-3">{title}</h4>
           <p className="text-gray-600 flex-grow">{description}</p>
@@ -258,34 +181,34 @@ const LearnspireLandingPage = () => {
 
   const features = [
     {
-      icon: LaptopIcon,
+      emoji: "💻",
       title: "Interactive Courses",
       description: "Engage learners with dynamic, adaptive content that evolves with their progress."
     },
     {
-      icon: UserCheckIcon,
+      emoji: "✅",
       title: "Smart Attendance",
       description: "Effortlessly monitor participation and progress with AI-powered tracking systems."
     },
     {
-      icon: CodeIcon,
+      emoji: "👨‍💻",
       title: "Coding Challenges",
       description: "Sharpen skills with real-world programming tasks and instant AI-driven feedback."
     },
     {
-      icon: BellIcon,
+      emoji: "🔔",
       title: "Timely Announcements",
       description: "Keep everyone informed with automated, personalized updates and reminders."
     },
     {
-      icon: ShieldCheckIcon,
+      emoji: "🛡️",
       title: "AI Proctoring",
       description: "Ensure exam integrity with advanced AI-powered monitoring and analysis."
     },
     {
-      icon: LayoutIcon,
-      title: "User-Friendly UI",
-      description: "Navigate effortlessly with our intuitive, customizable interface design."
+      "emoji": "💎",
+      "title": "User-Friendly UI",
+      "description": "Navigate effortlessly with our intuitive, customizable interface design."
     }
   ];
 
@@ -298,59 +221,54 @@ const LearnspireLandingPage = () => {
       />
 
       {/* Header Section */}
-      <motion.header 
+      <header 
         className={`bg-white/90 backdrop-blur-md shadow-md fixed w-full z-40 transition-all duration-300 ${scrollY > 100 ? 'py-2' : 'py-4'}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100 }}
       >
         <div className="container mx-auto flex justify-between items-center px-6">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Learnspire</h1>
+          <a href="/" className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+            Learnspire
+          </a>
           <nav className="hidden md:flex space-x-6">
-            <a href="#why-learnspire" className="text-gray-600 hover:text-blue-600 transition-colors">Why Learnspire?</a>
+            <a href="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
             <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
-            <motion.a 
+            <a href="#our-products" className="text-gray-600 hover:text-blue-600 transition-colors">Our Products</a>
+            <a href="#about-us" className="text-gray-600 hover:text-blue-600 transition-colors">About Us</a>
+            <a 
               href="#demo" 
               className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-md hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               Contact Us
-            </motion.a>
+            </a>
           </nav>
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-gray-600">
             {mobileMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
           </button>
         </div>
         {mobileMenuOpen && (
-          <motion.nav 
-            className="md:hidden bg-white border-t border-gray-100 py-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
+          <nav className="md:hidden bg-white border-t border-gray-100 py-4">
             <div className="container mx-auto px-6 flex flex-col space-y-4">
-              <a href="#why-learnspire" className="text-gray-600 hover:text-blue-600 transition-colors">Why Learnspire?</a>
+              <a href="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
               <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
+              <a href="#our-products" className="text-gray-600 hover:text-blue-600 transition-colors">Our Products</a>
+              <a href="#about-us" className="text-gray-600 hover:text-blue-600 transition-colors">About Us</a>
               <a href="#demo" className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-md hover:from-blue-600 hover:to-indigo-700 transition-all text-center shadow-md hover:shadow-lg">Contact Us</a>
             </div>
-          </motion.nav>
+          </nav>
         )}
-      </motion.header>
-      <section className="relative overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen flex items-center justify-center">
-      <div className="container mx-auto px-6 md:px-10 relative z-10">
+      </header>
+      {/* hero section */}
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen flex items-center justify-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="max-w-3xl lg:max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Enhanced Heading with Animated Underline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-indigo-900 drop-shadow-lg tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-indigo-900 drop-shadow-lg tracking-tight">
             Level Up Your Learning with{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 drop-shadow-md relative inline-block">
-              AI-Powered LMS
+              AI-Powered Solutions
               <motion.span
                 className="absolute bottom-0 left-0 w-full h-1 bg-pink-500"
                 initial={{ scaleX: 0 }}
@@ -360,9 +278,8 @@ const LearnspireLandingPage = () => {
             </span>
           </h1>
 
-          {/* Enhanced Paragraph with Animation */}
           <motion.p 
-            className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 leading-relaxed text-indigo-800"
+            className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 leading-relaxed text-indigo-800"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -377,26 +294,24 @@ const LearnspireLandingPage = () => {
             and earn rewards as you progress through our interactive learning quests.
           </motion.p>
 
-          {/* Enhanced XP and Level Display */}
-          <div className="flex justify-center items-center mb-8 space-x-4">
+          <div className="flex justify-center items-center mb-6 space-x-4">
             <motion.div 
-              className="bg-indigo-600 rounded-lg p-3 text-white shadow-lg"
+              className="bg-indigo-600 rounded-lg p-2 sm:p-3 text-white shadow-lg"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <span className="text-xl font-bold">XP: 1250</span>
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold">XP: 1250</span>
             </motion.div>
             <motion.div 
-              className="bg-purple-600 rounded-lg p-3 text-white shadow-lg"
+              className="bg-purple-600 rounded-lg p-2 sm:p-3 text-white shadow-lg"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <span className="text-xl font-bold">Level: 5</span>
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold">Level: 5</span>
             </motion.div>
           </div>
 
-          {/* Enhanced Progress Bar with Animation */}
-          <div className="w-full max-w-md mx-auto mb-8 bg-indigo-200 rounded-full h-4 overflow-hidden shadow-inner">
+          <div className="w-full max-w-md mx-auto mb-6 bg-indigo-200 rounded-full h-3 sm:h-4 overflow-hidden shadow-inner">
             <motion.div 
               className="bg-gradient-to-r from-teal-400 to-emerald-500 h-full rounded-full"
               initial={{ width: 0 }}
@@ -405,12 +320,11 @@ const LearnspireLandingPage = () => {
             />
           </div>
 
-          {/* Enhanced Achievement Badges */}
-          <div className="flex justify-center space-x-4 mb-8">
+          <div className="flex justify-center space-x-2 sm:space-x-4 mb-6">
             {['🏆', '🌟', '🎓', '🚀'].map((emoji, index) => (
               <motion.div
                 key={index}
-                className="bg-pink-200 rounded-full p-2 text-2xl shadow-lg"
+                className="bg-pink-200 rounded-full p-1 sm:p-2 text-lg sm:text-2xl shadow-lg"
                 whileHover={{ scale: 1.2, rotate: 360 }}
                 transition={{ duration: 0.5 }}
               >
@@ -419,15 +333,14 @@ const LearnspireLandingPage = () => {
             ))}
           </div>
 
-          {/* Enhanced Button with Glow Effect */}
           <motion.a
             href="#demo"
-            className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-3 px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 focus:outline-none relative overflow-hidden"
+            className="group inline-flex items-center text-white font-semibold text-sm sm:text-base md:text-lg py-2 px-4 sm:py-3 sm:px-6 md:py-4 md:px-8 rounded-full transition-all duration-300 shadow-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 focus:outline-none relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="relative z-10">Start Your Quest</span>
-            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={22} />
+            <ChevronRight className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={20} />
             <motion.div
               className="absolute inset-0 bg-white opacity-25"
               initial={{ scale: 0, x: "100%" }}
@@ -438,10 +351,10 @@ const LearnspireLandingPage = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 flex justify-center items-center overflow-hidden z-0 opacity-30">
+      {/* Background Elements */}
+      <div className="absolute inset-0 flex justify-center items-center overflow-hidden z-0 opacity-20 sm:opacity-30">
         <motion.div
-          className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-purple-200 via-indigo-200 to-pink-200 blur-[150px] opacity-30"
+          className="absolute top-0 left-0 w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] rounded-full bg-gradient-to-tr from-purple-200 via-indigo-200 to-pink-200 blur-[100px] sm:blur-[150px] opacity-30"
           animate={{ 
             scale: [1, 1.1, 1],
             rotate: 360
@@ -453,7 +366,7 @@ const LearnspireLandingPage = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-pink-200 via-purple-200 to-indigo-200 blur-[200px] opacity-30"
+          className="absolute bottom-0 right-0 w-[300px] sm:w-[400px] md:w-[600px] h-[300px] sm:h-[400px] md:h-[600px] rounded-full bg-gradient-to-bl from-pink-200 via-purple-200 to-indigo-200 blur-[120px] sm:blur-[200px] opacity-30"
           animate={{ 
             scale: [1, 1.2, 1],
             rotate: -360
@@ -466,12 +379,12 @@ const LearnspireLandingPage = () => {
         />
       </div>
 
-      {/* New Floating Elements */}
+      {/* Floating Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(10)].map((_, index) => (
+        {[...Array(8)].map((_, index) => (
           <motion.div
             key={index}
-            className="absolute w-4 h-4 rounded-full bg-white opacity-50"
+            className="absolute w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full bg-white opacity-50"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -491,152 +404,159 @@ const LearnspireLandingPage = () => {
       </div>
 
       {/* Soft Gradient Layer */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-indigo-100 z-5 pointer-events-none opacity-60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-indigo-100 z-5 pointer-events-none opacity-40 sm:opacity-60" />
     </section>
-    {/* why choose*/}
+    {/* why choose */}
     <section id="why-learnspire" className="py-20 md:py-32 bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
-  <div className="container mx-auto px-6 relative z-10">
-    <motion.h2
-      className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-10"
-      style={{ 
-        WebkitTextStroke: '1px rgba(59, 130, 246, 0.1)', 
-        lineHeight: '1.3',
-        textShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      Why Choose Learnspire?
-    </motion.h2>
-    
-    {/* Feature Cards with hover interaction */}
-    <motion.div
-      className="grid grid-cols-1 md:grid-cols-3 gap-12"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-    >
-      <FeatureCard
-        icon={RocketIcon}
-        title="Accelerate Learning"
-        description="Boost engagement and completion rates with AI-enhanced interactive features."
-        className="transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <FeatureCard
-        icon={GitBranchIcon}
-        title="Personalized Paths"
-        description="Tailor learning journeys with AI-driven recommendations based on individual progress."
-        className="transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <FeatureCard
-        icon={BarChartIcon}
-        title="AI-Powered Analytics"
-        description="Gain insights with detailed, AI-driven reports on learner performance and outcomes."
-        className="transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-    </motion.div>
-  </div>
-
-  {/* Enhanced Floating Shapes */}
-  <motion.div
-    className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400 rounded-full opacity-20 shadow-lg"
-    animate={{
-      y: [0, -20, 0],
-      rotate: [0, 360],
-      scale: [1, 1.1, 1],
-    }}
-    transition={{
-      duration: 10,
-      repeat: Infinity,
-      repeatType: "reverse",
-    }}
-  />
-  <motion.div
-    className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-indigo-400 rounded-lg opacity-20 shadow-lg"
-    animate={{
-      x: [0, 20, 0],
-      rotate: [0, -360],
-      scale: [1, 1.2, 1],
-    }}
-    transition={{
-      duration: 12,
-      repeat: Infinity,
-      repeatType: "reverse",
-    }}
-  />
-
-  {/* Additional Floating Shapes */}
-  <motion.div
-    className="absolute top-1/3 right-1/3 w-20 h-20 bg-indigo-300 rounded-full opacity-20 shadow-lg"
-    animate={{
-      x: [0, -20, 0],
-      rotate: [0, 180],
-      scale: [1, 1.15, 1],
-    }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      repeatType: "reverse",
-    }}
-  />
-  
-  {/* Particle Effects */}
-  <div className="absolute inset-0 pointer-events-none">
-    <div className="particles absolute w-full h-full bg-gradient-to-b from-transparent via-transparent to-indigo-100 opacity-10"></div>
-  </div>
-</section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 md:py-32 bg-gradient-to-b from-blue-100 via-purple-100 to-indigo-100 relative overflow-hidden perspective-1000">
       <div className="container mx-auto px-6 relative z-10">
-        <motion.h3
-          className="text-4xl md:text-5xl font-bold text-center mb-16"
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-10"
+          style={{
+            WebkitTextStroke: '1px rgba(59, 130, 246, 0.1)',
+            lineHeight: '1.3',
+            textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+          }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600">
-            Unlock Epic Features
-          </span>
-        </motion.h3>
+          Why Choose Learnspire?
+        </motion.h2>
+        
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-2xl hover:scale-105"
-              initial={{ opacity: 0, y: 20, rotateX: -15, rotateY: -15 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ rotateX: 5, rotateY: 5 }}
-            >
-              <div className="flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-500 rounded-2xl transform rotate-3 shadow-lg">
-                <feature.icon size={36} className="text-white transform -rotate-3" />
-              </div>
-              <h4 className="text-2xl font-semibold mb-4 text-gray-800">{feature.title}</h4>
-              <p className="text-gray-600">{feature.description}</p>
-              <motion.button
-                className="mt-6 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-semibold transform transition-transform duration-200 hover:scale-105"
-                whileHover={{ y: -3 }}
-                whileTap={{ y: 0 }}
-              >
-                Level Up
-              </motion.button>
-            </motion.div>
+          {[
+            {
+              emoji: "🚀",
+              title: "Accelerate Learning",
+              description: "Boost engagement and completion rates with AI-enhanced interactive features."
+            },
+            {
+              emoji: "🌿",
+              title: "Personalized Paths",
+              description: "Tailor learning journeys with AI-driven recommendations based on individual progress."
+            },
+            {
+              emoji: "📊",
+              title: "AI-Powered Analytics",
+              description: "Gain insights with detailed, AI-driven reports on learner performance and outcomes."
+            },
+            {
+              emoji: "🧠",
+              title: "Adaptive Learning",
+              description: "Our AI adjusts content difficulty in real-time to optimize the learning experience."
+            },
+            {
+              emoji: "👥",
+              title: "Collaborative Learning",
+              description: "Foster teamwork with AI-facilitated group projects and peer-to-peer learning."
+            },
+            {
+              emoji: "🛡️",
+              title: "Data Security",
+              description: "Rest easy with our advanced encryption and privacy-first approach to data handling."
+            }
+          ].map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
           ))}
         </motion.div>
       </div>
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" />
-        <div className="absolute top-1/3 right-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-2000" />
-        <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-4000" />
+
+      {/* Enhanced Floating Shapes */}
+      <motion.div
+        className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400 rounded-full opacity-20 shadow-lg"
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 360],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-indigo-400 rounded-lg opacity-20 shadow-lg"
+        animate={{
+          x: [0, 20, 0],
+          rotate: [0, -360],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
+      <motion.div
+        className="absolute top-1/3 right-1/3 w-20 h-20 bg-indigo-300 rounded-full opacity-20 shadow-lg"
+        animate={{
+          x: [0, -20, 0],
+          rotate: [0, 180],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
+
+      {/* Particle Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="particles absolute w-full h-full bg-gradient-to-b from-transparent via-transparent to-indigo-100 opacity-10"></div>
       </div>
     </section>
+
+    <section id="features" className="py-20 md:py-32 bg-purple-50 relative overflow-hidden">
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.h2
+      className="text-4xl md:text-5xl font-bold text-center mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+        Unlock Powerful Features
+      </span>
+    </motion.h2>
+    
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      {features.map((feature, index) => (
+        <motion.div
+          key={index}
+          className="bg-white rounded-xl shadow-lg p-8 transition-transform duration-300 hover:shadow-xl hover:scale-105"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+          <div className="flex items-center justify-center w-16 h-16 mb-6 bg-purple-100 rounded-full shadow-md">
+            <span className="text-2xl">{feature.emoji}</span>
+          </div>
+          <h3 className="text-xl font-semibold mb-4 text-gray-800">{feature.title}</h3>
+          <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+
+  <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+    <div className="absolute top-1/4 left-4 w-64 h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse" />
+    <div className="absolute top-1/3 right-4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse animation-delay-2000" />
+    <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-indigo-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse animation-delay-4000" />
+  </div>
+</section>
+
 
       {/* AI Learning Cycle Section */}
       <section className="py-20 md:py-32 bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
@@ -692,59 +612,163 @@ const LearnspireLandingPage = () => {
       </div>
     </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative">
-        <motion.h2
-          className="text-5xl md:text-6xl font-bold text-center text-indigo-800 mb-16"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
+{/* Our Products Section */}
+<section id="our-products" className="py-20 md:py-32 bg-gradient-to-b from-indigo-100 to-blue-50 relative overflow-hidden">
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.h2
+      className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">
+        Our Products
+      </span>
+    </motion.h2>
+
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      <motion.div
+        className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="text-5xl mb-6">📚</div>
+        <h3 className="text-2xl font-bold mb-4 text-indigo-700">LMS - Learning Management System</h3>
+        <p className="text-gray-700 mb-4">Streamline your educational processes with our comprehensive Learning Management System.</p>
+      </motion.div>
+
+      <motion.div
+        className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="text-5xl mb-6">💻</div>
+        <h3 className="text-2xl font-bold mb-4 text-indigo-700">TOP - Technology Operations Platform</h3>
+        <p className="text-gray-700 mb-4">Optimize your technology operations with our advanced management platform.</p>
+      </motion.div>
+
+      <motion.div
+        className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="text-5xl mb-6">🧪</div>
+        <h3 className="text-2xl font-bold mb-4 text-indigo-700">LMS - Lab Management System</h3>
+        <p className="text-gray-700 mb-4">Efficiently manage your laboratory resources and experiments with our Lab Management System.</p>
+      </motion.div>
+
+      <motion.div
+        className="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="text-5xl mb-6">👤</div>
+        <h3 className="text-2xl font-bold mb-4 text-indigo-700">PMS - Profiles Management System</h3>
+        <p className="text-gray-700 mb-4">Organize and manage user profiles seamlessly with our Profiles Management System.</p>
+      </motion.div>
+    </motion.div>
+
+    {/* Contact Us Button */}
+    <motion.div
+      className="mt-16 text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+    >
+      <motion.button
+        className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Contact Us
+      </motion.button>
+    </motion.div>
+  </div>
+
+  <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+    <div className="absolute top-1/4 right-4 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" />
+    <div className="absolute bottom-1/4 left-4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse animation-delay-2000" />
+  </div>
+</section>
+
+      {/* About Us Section */}
+      <section id="about-us" className="py-20 md:py-32 bg-purple-50 relative overflow-hidden">
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.h2
+      className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+        About Learnspire
+      </span>
+    </motion.h2>
+    
+    <motion.div
+      className="max-w-3xl mx-auto mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      <p className="text-lg mb-6 leading-relaxed text-gray-700">
+        Learnspire is dedicated to revolutionizing education through innovative learning solutions. Our mission is to inspire and empower learners of all ages to reach their full potential.
+      </p>
+      <p className="text-lg mb-6 leading-relaxed text-gray-700">
+        Founded in 2024, we've helped thousands of students achieve their academic and personal goals through our personalized approach to education.
+      </p>
+    </motion.div>
+
+    <motion.h3
+      className="text-3xl font-bold text-center mb-8 text-gray-800"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+    >
+      Our Team
+    </motion.h3>
+    
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-3 gap-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.6 }}
+    >
+      {[ 
+        { image: aqueelImage, name: "Aqeel Anaikar A", title: "CEO & Managing Director" }, 
+        { image: akashImage, name: "Akash S", title: "Partner & Developer" }, 
+        { image: fazilImage, name: "Fazil Ahamed F", title: "Partner & Developer" }
+      ].map((member, index) => (
+        <div 
+          key={index} 
+          className="bg-white rounded-lg p-6 shadow-md transform hover:scale-105 transition-transform duration-300"
         >
-          Player Testimonials
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              emoji: "⭐",
-              content: "Learnspire has leveled up our training program! The AI features have boosted our XP and engagement stats significantly.",
-              author: "Sarah Johnson",
-              role: "Guild Master at TechEd Solutions"
-            },
-            {
-              emoji: "🏆",
-              content: "The personalized learning quests have been our secret weapon. We've seen a 40% increase in quest completion rates!",
-              author: "Mark Thompson",
-              role: "Lorekeeper at Global Learning Institute"
-            },
-            {
-              emoji: "🧙‍♂️",
-              content: "Learnspire's analytics are like having a high-level mage on the team. We've unlocked unprecedented insights into our learners' progress.",
-              author: "Lisa Chen",
-              role: "Strategy Master at InnovateCore"
-            }
-          ].map((testimonial, index) => (
-            <motion.div 
-              key={index}
-              className="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">{testimonial.emoji}</div>
-              <p className="text-gray-700 mb-4 text-lg italic">"{testimonial.content}"</p>
-              <div className="text-right">
-                <p className="font-semibold text-indigo-800">{testimonial.author}</p>
-                <p className="text-sm text-gray-600">{testimonial.role}</p>
-              </div>
-              <div className="absolute -bottom-6 -right-6 text-9xl opacity-10 transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300">
-                {testimonial.emoji}
-              </div>
-            </motion.div>
-          ))}
+          <div className="flex justify-center mb-4">
+            <img 
+              src={member.image} 
+              alt={member.name} 
+              className="w-40 h-40 rounded-full border-4 border-purple-200 object-cover"
+            />
+          </div>
+          <h3 className="text-xl font-semibold text-center text-gray-800">{member.name}</h3>
+          <p className="text-purple-600 text-center">{member.title}</p>
         </div>
-      </div>
-    </section>
+      ))}
+    </motion.div>
+  </div>
+
+  <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+    <div className="absolute top-1/4 left-4 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-2xl opacity-20" />
+    <div className="absolute bottom-1/4 right-4 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20" />
+  </div>
+</section>
+
+      
     {/* CTA Section */}
     <section className="relative py-20 md:py-32 bg-gradient-to-br from-blue-50 to-purple-100 overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -846,6 +870,8 @@ const LearnspireLandingPage = () => {
               <ul className="space-y-2">
                 <li className="text-gray-400">info@learnspire.ai</li>
                 <li className="text-gray-400">+1 (555) 123-4567</li>
+                <li className="text-gray-400">244, First Floor A, Velachery - Tambaram Main Rd, Chinmaya Colony,
+                   Selaiyur, Rajakilpakkam, Chennai, Tamil Nadu 600073</li>
               </ul>
             </div>
             <div>
