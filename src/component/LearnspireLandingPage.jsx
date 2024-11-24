@@ -225,9 +225,11 @@ const LearnspireLandingPage = () => {
         className={`bg-white/90 backdrop-blur-md shadow-md fixed w-full z-40 transition-all duration-300 ${scrollY > 100 ? 'py-2' : 'py-4'}`}
       >
         <div className="container mx-auto flex justify-between items-center px-6">
-          <a href="/" className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-            Learnspire
-          </a>
+        <a href="/" className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#3dbdd3] to-[#7264f0]">
+  Learnspire
+</a>
+
+
           <nav className="hidden md:flex space-x-6">
             <a href="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
             <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
@@ -600,7 +602,7 @@ const LearnspireLandingPage = () => {
             whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)" }}
             whileTap={{ y: 0 }}
           >
-            Start Your AI Learning Adventure
+            Start Your Learning Adventure
           </motion.button>
         </div>
       </div>
